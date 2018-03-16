@@ -1,0 +1,20 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    >
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@drawable/recipe_item_selector"
+    android:elevation="8dp"
+    android:layout_gravity="center"
+    android:id="@+id/card_view_recipe"
+
+
+    tools:targetApi="lollipop">
+    <TextView
+        android:id="@+id/recipe_name"
+        style="@style/recipe_names"
+        />
+
+</android.support.v7.widget.CardView>
+    </GridLayout>

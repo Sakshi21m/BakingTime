@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="com.example.android.bakingtime.MasterListMain">
+<LinearLayout
+    android:id="@+id/ll_master_list_fragment"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+>
+<TextView
+    style="@style/step_names"
+    android:id="@+id/tv_ingredient"
+    android:text="@string/ingredient"
+    android:background="@drawable/recipe_item_selector"/>
+
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/rv_steps_name"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+</android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>
+
+<TextView
+android:id="@+id/tv_error_message_display2"
+    style="@style/error_message" />
+
+
+<ProgressBar
+android:id="@+id/pb_loading_indicator2"
+    style="@style/progress_bar" />
+
+
+</LinearLayout>

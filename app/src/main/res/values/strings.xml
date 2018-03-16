@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Baking Time</string>
+    <string name="error_message">
+        An error has occurred. Please try again by clicking REFRESH
+    </string>
+    <string name="ingredient">Ingredients</string>
+    <string name="ingredient_detail_title">Ingredients:</string>
+    <string name="next">Next Step</string>
+    <string name="previous">Previous Step</string>
+    <string name="appwidget_text">Ingredients</string>
+
+    <string name="empty_view_text">Please open a recipe inside the app.</string>
+
+</resources>
