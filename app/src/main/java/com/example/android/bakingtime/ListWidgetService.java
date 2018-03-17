@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sakshimajmudar on 13/03/18.
+ * Created by  on 13/03/18.
  */
 
 public class ListWidgetService extends RemoteViewsService {
@@ -49,7 +49,7 @@ public class ListWidgetService extends RemoteViewsService {
         if(!list.isEmpty()) {
             mIngredientDetails = list;
             mIngredientCount = list.size();
-            System.out.println("sakshi set data is not empty");
+            System.out.println(" set data is not empty");
         }else{
             mIngredientDetails = null;
             mIngredientCount = 0;
@@ -93,7 +93,7 @@ public class ListWidgetService extends RemoteViewsService {
 
 
          if(mIngredientDetails==null || mIngredientDetails.size()==0){
-            System.out.println("widget sakshi list is null");
+            System.out.println("widget  list is null");
             return null;}
         else{
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_details);

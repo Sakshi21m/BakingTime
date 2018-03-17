@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.bakingtime.Utilities.NetworkUtils;
-import com.example.android.bakingtime.Utilities.jsonAllRecipeName;
+import com.example.android.bakingtime.utilities.NetworkUtils;
+import com.example.android.bakingtime.utilities.jsonAllRecipeName;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements AdapterAllRecipeN
 
     @Override
     public Loader<List<ArrayList>> onCreateLoader(int id, final Bundle args) {
-            System.out.println("sakshi this"+this.toString());
+            System.out.println(" this"+this.toString());
 
         return new AsyncTaskLoader<List<ArrayList>>(this) {
             private List<ArrayList> jSonResult;
@@ -93,13 +93,13 @@ public class MainActivity extends AppCompatActivity implements AdapterAllRecipeN
                 if(jSonResult!=null){
                     mLoadingIndicator.setVisibility(View.INVISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    System.out.println("sakshi indicator");
+                    System.out.println(" indicator");
 
                     deliverResult(jSonResult);
                 }else{
                     mLoadingIndicator.setVisibility(View.INVISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    System.out.println("sakshi indicator not set previuosly");
+                    System.out.println(" indicator not set previuosly");
                     forceLoad();
                 }
 }
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterAllRecipeN
                 URL popularMovieURL = NetworkUtils.popularMovieBuildUrl();
 
                         try {
-                            System.out.println("sakshi 111 jsonPMResponse"+jsonPMResponse.length());
+                            System.out.println(" 111 jsonPMResponse"+jsonPMResponse.length());
 
                             jsonPMResponse = NetworkUtils
                                     .getResponseFromHttpUrl(popularMovieURL);
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements AdapterAllRecipeN
             bundle.putString("id",id);
             bundle.putString("name", name);
             bundle.putString("json",jsonPMResponse);
-            System.out.println("sakshi imp jsonPMResponselenght"+jsonPMResponse.length());
+            System.out.println(" imp jsonPMResponselenght"+jsonPMResponse.length());
             Intent intent = new Intent(this, MasterListMain.class);
             intent.putExtras(bundle);
             startActivity(intent);

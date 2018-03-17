@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sakshimajmudar on 26/02/18.
+ * Created by majmudar on 26/02/18.
  */
 
 public class MasterListStepsAdapter extends RecyclerView.Adapter<MasterListStepsAdapter.NumberViewHolder> {
@@ -28,7 +28,7 @@ public class MasterListStepsAdapter extends RecyclerView.Adapter<MasterListSteps
         if(!stepNames.isEmpty()) {
             mStepNames = stepNames;
             mNumberOfSteps = stepNames.size();
-            System.out.println("sakshi setdata is not empty");
+            System.out.println(" setdata is not empty");
         }else{
             mStepNames = null;
             mNumberOfSteps = 0;

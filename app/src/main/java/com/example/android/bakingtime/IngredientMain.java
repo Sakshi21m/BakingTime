@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by sakshimajmudar on 27/02/18.
+ * Created by  on 27/02/18.
  */
 
 public class IngredientMain extends AppCompatActivity {

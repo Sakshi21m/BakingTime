@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.android.bakingtime.Utilities.JsonStepNames;
+import com.example.android.bakingtime.utilities.JsonStepNames;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
@@ -35,7 +35,7 @@ import java.util.List;
 
 
 /**
- * Created by sakshimajmudar on 10/03/18.
+ * Created by  on 10/03/18.
  */
 
 public class VideoFragment extends Fragment {
@@ -50,6 +50,7 @@ public class VideoFragment extends Fragment {
     private String json;
     private String recipeId;
     private List<ArrayList> stepDetails;
+    private long seekToPosition=0;
 
     public VideoFragment() {
 
@@ -64,7 +65,7 @@ public class VideoFragment extends Fragment {
             twoPane = this.getArguments().getBoolean("twoPane");
             json = this.getArguments().getString("json");
             recipeId = this.getArguments().getString("recipeId");
-            System.out.println("sakshi video link is "+videoUrl);
+            System.out.println(" video link is "+videoUrl);
 
         }
     }
@@ -83,11 +84,13 @@ public class VideoFragment extends Fragment {
             json= savedInstanceState.getString("json");
             recipeId =savedInstanceState.getString("recipeId");
               stepDetails = (ArrayList) savedInstanceState.getParcelableArrayList("data");
+            seekToPosition = savedInstanceState.getLong("exoState");
+
 
 
         }
 
-        System.out.println("sakshi inside create");
+        System.out.println(" inside create");
 
         final View rootView = inflater.inflate(R.layout.video_details, container, false);
         mPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
@@ -104,11 +107,11 @@ public class VideoFragment extends Fragment {
                 //video takes up full screen in Landscape mode phone
             }
             initializePlayer();
-            System.out.println("sakshi player initialised");
+            System.out.println(" player initialised");
 
         }else{
             mPlayerView.setVisibility(View.GONE);
-            System.out.println("sakshi set to invisible");
+            System.out.println(" set to invisible");
 
         }
 
@@ -135,7 +138,7 @@ public class VideoFragment extends Fragment {
 
                     if (stepId.equals(stepDetails.get(0).get(0).toString())){
                         previous.setVisibility(View.GONE);
-                        System.out.println("sakshi this is first step");
+                        System.out.println(" this is first step");
 
                     }
                     if (stepId.equals(stepDetails.get(i).get(0).toString())) {
@@ -143,14 +146,14 @@ public class VideoFragment extends Fragment {
                         if(i==(stepDetails.size()-1))
                         {
                             next.setVisibility(View.GONE);
-                            System.out.println("sakshi this is last step");
+                            System.out.println(" this is last step");
 
                         }else
                         {
                             urlNext = stepDetails.get(i + 1).get(3).toString();
                             descriptionNext = stepDetails.get(i + 1).get(2).toString();
                             newStepId = stepDetails.get(i + 1).get(0).toString();
-                            System.out.println("sakshi inside loop for urlNext " + urlNext);
+                            System.out.println(" inside loop for urlNext " + urlNext);
                             if(i>0) {
                                 urlPrevious = stepDetails.get(i - 1).get(3).toString();
                                 descriptionPrevious = stepDetails.get(i - 1).get(2).toString();
@@ -181,13 +184,13 @@ public class VideoFragment extends Fragment {
                     bundle.putString("stepId", newStepId2);
                     bundle.putString("stepName", "");
                     bundle.putString("stepDescription", desc);
-                    System.out.println("sakshi inside loop for stepDescription next"+desc);
+                    System.out.println(" inside loop for stepDescription next"+desc);
                     bundle.putString("videoUrl", url);
                     bundle.putString("stepThumbNail", "");
                     bundle.putBoolean("twoPane",twoPane);
                     bundle.putString("json",json);
                     bundle.putString("recipeId",recipeId);
-                    System.out.println("sakshi new data for next set");
+                    System.out.println(" new data for next set");
 
                     Intent intent = new Intent(getContext(), VideoScreenMain.class);
                     intent.putExtras(bundle);
@@ -204,13 +207,13 @@ public class VideoFragment extends Fragment {
                     bundle.putString("stepId", prevStepId);
                     bundle.putString("stepName", "");
                     bundle.putString("stepDescription", prevDesc);
-                    System.out.println("sakshi inside loop for prevDesc"+prevDesc);
+                    System.out.println(" inside loop for prevDesc"+prevDesc);
                     bundle.putString("videoUrl", prevUrl);
                     bundle.putString("stepThumbNail", "");
                     bundle.putBoolean("twoPane",twoPane);
                     bundle.putString("json",json);
                     bundle.putString("recipeId",recipeId);
-                    System.out.println("sakshi new data for next set");
+                    System.out.println(" new data for next set");
 
                     Intent intent = new Intent(getContext(), VideoScreenMain.class);
                     intent.putExtras(bundle);
@@ -220,7 +223,7 @@ public class VideoFragment extends Fragment {
             });
         }
 
-        System.out.println("sakshi trying to return root view");
+        System.out.println(" trying to return root view");
         return rootView;
     }
 
@@ -237,6 +240,14 @@ public class VideoFragment extends Fragment {
             mExoPlayer = null;
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+        }
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -247,16 +258,18 @@ public class VideoFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        releasePlayer();
-
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        releasePlayer();
-
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
     }
 
 
@@ -264,15 +277,19 @@ public class VideoFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        System.out.println("sakshi inside resume");
-
+        System.out.println(" inside resume");
         if(videoUrl!=null && !videoUrl.isEmpty()) {
             if (!twoPane) {
                 hideSystemUi();
                 //video takes up full screen in phone
             }
-            initializePlayer();
-            System.out.println("sakshi initialise player");
+
+        if ((Util.SDK_INT <= 23 || mExoPlayer == null)){
+
+
+                initializePlayer();
+                System.out.println(" initialise player");
+            }
 
         }
 
@@ -280,22 +297,23 @@ public class VideoFragment extends Fragment {
 
     public void initializePlayer() {
         if (mExoPlayer == null) {
-            System.out.println("sakshi inside exoplayer");
-
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
             mPlayerView.setPlayer(mExoPlayer);
 
-            //String urlString = "http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4";
-            System.out.println("sakshi "+videoUrl);
             Uri mediaUri = Uri.parse(videoUrl);
             String userAgent = Util.getUserAgent(getActivity(), "Bakingtime");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
+            if (seekToPosition!=0){
+                mExoPlayer.seekTo(seekToPosition);
+            }
             mExoPlayer.setPlayWhenReady(true);
+
+
         }else{
-            System.out.println("sakshi exoplayer is not null");
+            System.out.println("exoplayer is not null");
 
         }
     }
@@ -324,6 +342,8 @@ public class VideoFragment extends Fragment {
         state.putString("json",json);
         state.putString("recipeId",recipeId );
         state.putParcelableArrayList("data",(ArrayList)stepDetails);
+        state.putLong("exoState",mExoPlayer.getCurrentPosition());
+        System.out.println("current position is "+mExoPlayer.getCurrentPosition());
 
     }
 

@@ -24,8 +24,8 @@ public class BakingTimeWidget extends AppWidgetProvider {
 
         Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
         int width = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
-        if (width<300)
-        {
+       /* if (width<300)
+        //{
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_time_widget);
             views.setTextViewText(R.id.appwidget_text, "Ingredients for "+recipeName);
             Intent intent = new Intent(context,IngredientMain.class);
@@ -37,7 +37,7 @@ public class BakingTimeWidget extends AppWidgetProvider {
 
             System.out.println("widget inside min width");
 
-        }else{
+        //}else{*/
 
             System.out.println("widget inside big width");
 
@@ -68,7 +68,7 @@ public class BakingTimeWidget extends AppWidgetProvider {
             System.out.println("widget after 6");
 
 
-        }
+        //}
     }
 
 
@@ -77,7 +77,7 @@ public class BakingTimeWidget extends AppWidgetProvider {
         // There may be multiple widgets active, so update all of them
         Bundle bundle = new Bundle();
         bundle.putString("id", "1");
-        bundle.putString("name", "sakshi");
+        bundle.putString("name", "");
         bundle.putString("json", "abcd");
         String name="";
         for (int appWidgetId : appWidgetIds) {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sakshimajmudar on 27/02/18.
+ * Created by  on 27/02/18.
  */
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ListOfIngredients>{

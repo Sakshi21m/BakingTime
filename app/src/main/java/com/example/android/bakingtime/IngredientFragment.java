@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.bakingtime.Utilities.JsonIngredientDetails;
+import com.example.android.bakingtime.utilities.JsonIngredientDetails;
 
 import org.json.JSONException;
 
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sakshimajmudar on 27/02/18.
+ * Created by majmudar on 27/02/18.
  */
 
 public class IngredientFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ArrayList>> {
@@ -51,7 +51,7 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
             mJson = this.getArguments().getString("json");
             mName = this.getArguments().getString("name");
 
-            System.out.println("setters called sakshi");
+            System.out.println("setters called ");
         }
     }
 
@@ -141,10 +141,10 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
         title.setVisibility(View.VISIBLE);
         if (pmDataSet != null) {
-            System.out.println("sakshi Number of ingredients are  "+pmDataSet.size());
+            System.out.println(" Number of ingredients are  "+pmDataSet.size());
             mAdapter.setter(pmDataSet);
         } else {
-            System.out.println("sakshi ingredients data set is null ");
+            System.out.println(" ingredients data set is null ");
             showErrorMessage();
         }
 

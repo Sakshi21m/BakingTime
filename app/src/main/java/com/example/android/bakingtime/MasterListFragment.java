@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.bakingtime.Utilities.JsonStepNames;
+import com.example.android.bakingtime.utilities.JsonStepNames;
 
 import org.json.JSONException;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by sakshimajmudar on 26/02/18.
+ * Created by majmudar on 26/02/18.
  */
 
 public class MasterListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<ArrayList>> {
@@ -64,7 +64,7 @@ private Parcelable layoutManagerSavedState;
             mId = this.getArguments().getString("id");
             mName = this.getArguments().getString("name");
             mJson = this.getArguments().getString("json");
-            System.out.println("sakshi imp json"+mName+mId);
+            System.out.println(" imp json"+mName+mId);
             mTwoPane = this.getArguments().getBoolean("paneMode");
 
         }else{
@@ -92,7 +92,7 @@ private Parcelable layoutManagerSavedState;
         mLoadingIndicator = (ProgressBar) rootView.findViewById(R.id.pb_loading_indicator2);
         linearLayout = (LinearLayout)rootView.findViewById(R.id.ll_master_list_fragment);
         fragmentManager = getActivity().getSupportFragmentManager();
-        System.out.println("sakshi fragmentManager called");
+        System.out.println(" fragmentManager called");
 
 
 
@@ -105,7 +105,7 @@ private Parcelable layoutManagerSavedState;
                 bundle.putString("json", mJson);
 
                 if(mTwoPane){
-                    System.out.println("sakshi mTwoPane is true");
+                    System.out.println(" mTwoPane is true");
                     ingredientFragment = new IngredientFragment();
                     ingredientFragment.setArguments(bundle);
                     ingredientFragment.setters();
@@ -113,20 +113,20 @@ private Parcelable layoutManagerSavedState;
                     if(fragmentManager.findFragmentByTag("ingredient")!=null){
                         fragmentManager.beginTransaction().replace(R.id.fragment_ingredients_main, ingredientFragment,"ingredient").commit();
                         //replace container if already exist else add it
-                        System.out.println("sakshi ingredient container is replaced");
+                        System.out.println(" ingredient container is replaced");
 
                     }else{
                         fragmentManager.beginTransaction().add(R.id.fragment_ingredients_main, ingredientFragment,"ingredient").commit();
-                        System.out.println("sakshi container is added");
+                        System.out.println(" container is added");
 
                     }
                     if(fragmentManager.findFragmentByTag("videoFragment")!=null) {
-                        System.out.println("sakshi videoFragment container is removed");
+                        System.out.println(" videoFragment container is removed");
                         fragmentManager.beginTransaction().remove(videoFragment).commit();
                     }
                 }
                 else {
-                    System.out.println("sakshi mTwoPane is false");
+                    System.out.println(" mTwoPane is false");
 
                     Intent intent = new Intent(getContext(), IngredientMain.class);
                     intent.putExtras(bundle);
@@ -142,7 +142,7 @@ private Parcelable layoutManagerSavedState;
 
  if(!mTwoPane) {
      //opens a new activity in phone
-     System.out.println("sakshi inside mobile mode ");
+     System.out.println(" inside mobile mode ");
      mAdapter = new MasterListStepsAdapter(new MasterListStepsAdapter.OnStepClickListener() {
          @Override
          public void onStepSelected(String stepId) {
@@ -158,12 +158,12 @@ private Parcelable layoutManagerSavedState;
                      bundle.putBoolean("twoPane",mTwoPane);
                      bundle.putString("json",mJson);
                      bundle.putString("recipeId",mId);
-                     System.out.println("sakshi video" + stepDetails.get(i).get(3).toString());
-                     System.out.println("sakshi video" + stepDetails.get(i).get(1).toString());
+                     System.out.println(" video" + stepDetails.get(i).get(3).toString());
+                     System.out.println(" video" + stepDetails.get(i).get(1).toString());
 
                      break;
                  } else {
-                     System.out.println("sakshi stepId is" + stepId + "and stepDetails.get(i).get(0) is " + stepDetails.get(i).get(0));
+                     System.out.println(" stepId is" + stepId + "and stepDetails.get(i).get(0) is " + stepDetails.get(i).get(0));
                  }
              }
 
@@ -174,8 +174,8 @@ private Parcelable layoutManagerSavedState;
          }
      });
  }else{
-     System.out.println("sakshi inside tablet mode ");
-     System.out.println("sakshi mTwoPane is true");
+     System.out.println(" inside tablet mode ");
+     System.out.println(" mTwoPane is true");
 
      mAdapter = new MasterListStepsAdapter(new MasterListStepsAdapter.OnStepClickListener() {
          @Override
@@ -194,7 +194,7 @@ private Parcelable layoutManagerSavedState;
                  fragmentManager.beginTransaction().remove(ingredientFragment).commit();
 
                  //replace container if already exist else add it
-                 System.out.println("sakshi ingredient container is replaced");
+                 System.out.println(" ingredient container is replaced");
 
              }
 
@@ -208,11 +208,11 @@ private Parcelable layoutManagerSavedState;
                      bundle.putString("videoUrl", stepDetails.get(i).get(3).toString());
                      bundle.putString("stepThumbNail", stepDetails.get(i).get(4).toString());
                      bundle.putBoolean("twoPane",mTwoPane);
-                     System.out.println("sakshi video" + stepDetails.get(i).get(3).toString());
+                     System.out.println(" video" + stepDetails.get(i).get(3).toString());
 
                      break;
                  } else {
-                     System.out.println("sakshi stepId is" + stepId + "and stepDetails.get(i).get(0) is " + stepDetails.get(i).get(0));
+                     System.out.println(" stepId is" + stepId + "and stepDetails.get(i).get(0) is " + stepDetails.get(i).get(0));
                  }
              }
              videoFragment = new VideoFragment();
@@ -223,12 +223,12 @@ private Parcelable layoutManagerSavedState;
 
              if(fragmentManager.findFragmentByTag("videoFragment")!=null){
                  fragmentManager.beginTransaction().replace(R.id.video_main_container, videoFragment,"videoFragment").commit();
-                 System.out.println("sakshi videoFragment container is replaced");
+                 System.out.println(" videoFragment container is replaced");
 
 
              }else{
                  fragmentManager.beginTransaction().add(R.id.video_main_container, videoFragment,"videoFragment").commit();
-                 System.out.println("sakshi videoFragment container is added");
+                 System.out.println(" videoFragment container is added");
 
              }
 
@@ -237,13 +237,13 @@ private Parcelable layoutManagerSavedState;
 
  }
         recyclerView.setAdapter(mAdapter);
-        System.out.println("sakshi1 loader manager sdf");
+        System.out.println("1 loader manager sdf");
 
         // FragmentActivity fm = new FragmentActivity();
         LoaderManager lm = getLoaderManager();
         Bundle bundle = new Bundle();
         lm.initLoader(BT_Loader,bundle,this);
-        System.out.println("sakshi1 loader manager initiated");
+        System.out.println("1 loader manager initiated");
         return rootView;
     }
 
@@ -258,7 +258,7 @@ private Parcelable layoutManagerSavedState;
     @Override
     public void onStartLoading() {
         super.onStartLoading();
-        System.out.println("sakshi1 to be set");
+        System.out.println("1 to be set");
 
         if (args == null) {
             return;
@@ -268,7 +268,7 @@ private Parcelable layoutManagerSavedState;
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
         forceLoad();
-System.out.println("sakshi1 views set invisible");
+System.out.println("1 views set invisible");
         //caching the Loader
 
 
@@ -277,7 +277,7 @@ System.out.println("sakshi1 views set invisible");
             mErrorMessageDisplay.setVisibility(View.INVISIBLE);
             ingredient.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.VISIBLE);
-            System.out.println("sakshi indicator");
+            System.out.println(" indicator");
 
             deliverResult(jSonResult);
         }else{
@@ -285,7 +285,7 @@ System.out.println("sakshi1 views set invisible");
             mErrorMessageDisplay.setVisibility(View.INVISIBLE);
             ingredient.setVisibility(View.VISIBLE);
             linearLayout.setVisibility(View.VISIBLE);
-            System.out.println("sakshi indicator not set previuosly");
+            System.out.println(" indicator not set previuosly");
             forceLoad();
         }
     }
@@ -294,7 +294,7 @@ System.out.println("sakshi1 views set invisible");
     public List<ArrayList> loadInBackground() {
 
         try {
-            System.out.println("sakshi1 load in bg");
+            System.out.println("1 load in bg");
 
             stepDetails =  JsonStepNames.getSimpleStringsFromJson(mJson,mId);
             return stepDetails;
@@ -324,17 +324,17 @@ System.out.println("sakshi1 views set invisible");
         mErrorMessageDisplay.setVisibility(View.INVISIBLE);
         ingredient.setVisibility(View.VISIBLE);
         if (pmDataSet != null) {
-            System.out.println("sakshi2 pmdataset is "+pmDataSet.size());
+            System.out.println("2 pmdataset is "+pmDataSet.size());
             mAdapter.setData(pmDataSet);
         } else {
-            System.out.println("sakshi2 pmdataset is null ");
+            System.out.println("2 pmdataset is null ");
             showErrorMessage();
         }
     }
 
     @Override
     public void onLoaderReset(Loader<List<ArrayList>> loader) {
-        System.out.println("sakshi2 onLoaderReset");
+        System.out.println("2 onLoaderReset");
 
     }
     private void showErrorMessage() {

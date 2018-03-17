@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by sakshimajmudar on 10/03/18.
+ * Created by majmudar on 10/03/18.
  */
 
 public class VideoScreenMain extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class VideoScreenMain extends AppCompatActivity {
             Boolean twoPane = getIntent().getBooleanExtra("twoPane", false);
             String json = getIntent().getStringExtra("json");
             String recipeId = getIntent().getStringExtra("recipeId");
-            System.out.println("sakshi video name" + name + "url" + stepUrl);
+            System.out.println(" video name" + name + "url" + stepUrl);
 
             Bundle bundle = new Bundle();
             bundle.putString("stepId", stepId);
@@ -63,7 +63,7 @@ public class VideoScreenMain extends AppCompatActivity {
             Boolean twoPane = getIntent().getBooleanExtra("twoPane", false);
             String json = getIntent().getStringExtra("json");
             String recipeId = getIntent().getStringExtra("recipeId");
-            System.out.println("sakshi video name" + name + "url" + stepUrl);
+            System.out.println(" video name" + name + "url" + stepUrl);
 
             Bundle bundle = new Bundle();
             bundle.putString("stepId", stepId);

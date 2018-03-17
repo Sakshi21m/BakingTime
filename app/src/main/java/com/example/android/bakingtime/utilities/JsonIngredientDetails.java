@@ -1,4 +1,4 @@
-package com.example.android.bakingtime.Utilities;
+package com.example.android.bakingtime.utilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -35,7 +35,8 @@
         <activity
             android:name=".VideoScreenMain"
             android:parentActivityName=".MasterListMain"
-            tools:targetApi="jelly_bean" />
+            tools:targetApi="jelly_bean"
+            android:configChanges="orientation|screenSize"/>
 
         <receiver android:name=".BakingTimeWidget">
             <intent-filter>

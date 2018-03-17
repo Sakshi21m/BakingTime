@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by sakshimajmudar on 25/02/18.
+ * Created by majmudar on 25/02/18.
  */
 
 public class MasterListMain extends AppCompatActivity implements MasterListStepsAdapter.OnStepClickListener {
@@ -79,6 +79,6 @@ public class MasterListMain extends AppCompatActivity implements MasterListSteps
 
     @Override
     public void onStepSelected(String stepId) {
-        System.out.println("sakshi stepid" + stepId);
+        System.out.println(" stepid" + stepId);
     }
 }
