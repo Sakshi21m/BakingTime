@@ -38,4 +38,9 @@
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thumb_nail"/>
+
 </LinearLayout>

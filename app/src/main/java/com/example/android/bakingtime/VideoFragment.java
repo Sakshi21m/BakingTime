@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
+
 
 import com.example.android.bakingtime.utilities.JsonStepNames;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -51,6 +54,7 @@ public class VideoFragment extends Fragment {
     private String recipeId;
     private List<ArrayList> stepDetails;
     private long seekToPosition=0;
+    String stepThumbNail;
 
     public VideoFragment() {
 
@@ -65,6 +69,7 @@ public class VideoFragment extends Fragment {
             twoPane = this.getArguments().getBoolean("twoPane");
             json = this.getArguments().getString("json");
             recipeId = this.getArguments().getString("recipeId");
+            stepThumbNail = this.getArguments().getString("stepThumbNail");
             System.out.println(" video link is "+videoUrl);
 
         }
@@ -85,6 +90,7 @@ public class VideoFragment extends Fragment {
             recipeId =savedInstanceState.getString("recipeId");
               stepDetails = (ArrayList) savedInstanceState.getParcelableArrayList("data");
             seekToPosition = savedInstanceState.getLong("exoState");
+            stepThumbNail = savedInstanceState.getString("stepThumbNail");
 
 
 
@@ -97,6 +103,7 @@ public class VideoFragment extends Fragment {
         final TextView description = (TextView) rootView.findViewById(R.id.tv_step_description);
         Button next = (Button)rootView.findViewById(R.id.button_next_step);
         Button previous = (Button)rootView.findViewById(R.id.button_previous_step);
+        ImageView stepThumbNailImage = (ImageView)rootView.findViewById(R.id.thumb_nail);
 
 
         if(videoUrl!=null && !videoUrl.isEmpty()) {
@@ -106,7 +113,7 @@ public class VideoFragment extends Fragment {
                     hideSystemUi();
                 //video takes up full screen in Landscape mode phone
             }
-            initializePlayer();
+           // initializePlayer();
             System.out.println(" player initialised");
 
         }else{
@@ -116,6 +123,18 @@ public class VideoFragment extends Fragment {
         }
 
         description.setText(stepDescription);
+        if(stepThumbNail.equals(""))
+        {
+
+            stepThumbNailImage.setVisibility(View.GONE);
+
+        }else
+        {
+            Uri link = Uri.parse(stepThumbNail);
+            Picasso.with(getContext()).load(link).into(stepThumbNailImage);
+            System.out.println("stepThumbNail!=null"+stepThumbNail);
+
+        }
 
         if(twoPane){
             next.setVisibility(View.GONE);
@@ -309,7 +328,7 @@ public class VideoFragment extends Fragment {
             if (seekToPosition!=0){
                 mExoPlayer.seekTo(seekToPosition);
             }
-            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.setPlayWhenReady(mExoPlayer.getPlayWhenReady());
 
 
         }else{
@@ -342,8 +361,13 @@ public class VideoFragment extends Fragment {
         state.putString("json",json);
         state.putString("recipeId",recipeId );
         state.putParcelableArrayList("data",(ArrayList)stepDetails);
+        if(mExoPlayer!=null)
         state.putLong("exoState",mExoPlayer.getCurrentPosition());
-        System.out.println("current position is "+mExoPlayer.getCurrentPosition());
+        else{
+            state.putLong("exoState",0);
+
+        }
+        state.putString("stepThumbNail", stepThumbNail);
 
     }
 
